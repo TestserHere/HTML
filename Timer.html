@@ -1,76 +1,68 @@
 <html>
-<head>
-<title>Timer</title>
-</head>
-<body>
-<p id="Timer">Timer</p>
-<button onclick='onStart()' id="Start">
-Start
-</button>
-<button onclick='onStop()' id="Stop" disabled=true>
-Stop
-</button>
-<button onclick='onReset()' id="Reset" disabled=true>
-Reset
-</button>
+  <head>
+    <title>Timer</title>
+  </head>
+  <body>
+    <p id="Timer">Timer</p>
+    <button onclick="onStart()" id="Start">Start</button>
+    <button onclick="onStop()" id="Stop" disabled="true">Stop</button>
+    <button onclick="onReset()" id="Reset" disabled="true">Reset</button>
 
+    <input type="text" id="th" value="00" />:
+    <input type="text" id="tm" value="00" />:
+    <input type="text" id="ts" value="00" />
+    <script>
+      ts = 0;
+      tm = 0;
+      th = 0;
+      let start = false;
+      function Timer() {
+        if (start == true) {
+          ts = ts - 1;
+          if (ts == -1) {
+            ts = 59;
+            tm = tm - 1;
+          }
+          if (tm == -1) {
+            tm = 59;
+            th = th - 1;
+          }
 
+          document.getElementById("Timer").innerText =
+            ("0" + th).slice(-2) +
+            ":" +
+            ("0" + tm).slice(-2) +
+            ":" +
+            ("0" + ts).slice(-2);
 
+          if (ts == 0 && tm == 0 && th == 0) {
+            start = false;
+            alert("Time is up!");
+          }
+        }
+      }
+      setInterval(Timer, 1000);
+      function onStart() {
+        th = document.getElementById("th").value;
+        tm = document.getElementById("tm").value;
+        ts = document.getElementById("ts").value;
+        start = true;
+        document.getElementById("Start").disabled = false;
+        document.getElementById("Stop").disabled = true;
+      }
 
+      function onStop() {
+        start = false;
+        document.getElementById("Start").disabled = true;
+        document.getElementById("Stop").disabled = false;
+        document.getElementById("Reset").disabled = true;
+      }
 
-
-<input type="text" id="th" value="00">:
-<input type="text" id="tm" value="00">:
-<input type="text" id="ts" value="00">
-<script>
-ts = 0
-tm = 0
-th = 0
-start=false
-function Timer() {
-	if (start==true){
-		ts = ts - 1
-		if (ts==-1){
-			ts = 59
-			tm = tm - 1
-		
-		}
-		if (tm==-1){
-			tm = 59
-			th = th - 1
-		
-		}
-
-		document.getElementById("Timer").innerText=("0" + th).slice(-2)+":"+("0" + tm).slice(-2)+":"+("0" + ts).slice(-2);
-
-		if (ts==0 && tm==0 && th==0){
-			start=false
-			alert("Time is up!")
-		
-		}
-	}
-	
-
-}
-setInterval(Timer,1000)
-function onStart(){
-	
-	th = document.getElementById("th").value
-	tm = document.getElementById("tm").value
-	ts = document.getElementById("ts").value
-	start=true
-}
-
-function onStop(){
-	start=false
-
-}
-
-function onReset(){
-	
-
-}
-
-</script>
-</body>
+      function onReset() {
+        document.getElementById("Start").disabled = false;
+        document.getElementById("Stop").disabled = true;
+        document.getElementById("Reset").disabled = true;
+      }
+    </script>
+  </body>
 </html>
