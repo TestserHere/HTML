@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>
+Stopwatch
+</title>
+</head>
+<body>
+<p id='Stopwatch'>
+Stopwatch
+</p>ß
+<button onclick='onStart()' id="Start">
+Start
+</button>
+<button onclick='onStop()' id="Stop" disabled=true>
+Stop
+</button>
+<button onclick='onReset()' id="Reset" disabled=true>
+Reset
+</button>
+<script>
+ss = 0
+sm = 0
+sh = 0
+start=false
+function Stopwatch() {
+	if (start==true){
+		ss = ss + 1
+		if (ss==60){
+			ss = 0
+			sm = sm + 1
+		
+		}
+		if (sm==60){
+			sm = 0
+			sh = sh + 1
+		
+		}
+		document.getElementById("Stopwatch").innerText=("0" + sh).slice (-2)+":"+("0" + sm).slice (-2)+":"+("0" + ss).slice (-2);
+	}
+	
+
+}
+setInterval(Stopwatch,1000)
+
+function onStart(){
+	start=true
+	document.getElementById("Start").disabled=true
+	document.getElementById("Stop").disabled=false
+	document.getElementById("Reset").disabled=true
+}
+
+function onStop(){
+	start=false
+	document.getElementById("Start").disabled=false
+	document.getElementById("Stop").disabled=true
+	document.getElementById("Reset").disabled=false
+}
+
+function onReset(){
+	ss=0
+	sm=0
+	sh=0
+	document.getElementById("Stopwatch").innerText="00:00:00"
+	document.getElementById("Reset").disabled=true
+
+}
+
+
+</script>
+</body>
+</html>
