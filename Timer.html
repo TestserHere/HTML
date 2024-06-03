@@ -8,9 +8,9 @@
     <button onclick="onStop()" id="Stop" disabled="true">Stop</button>
     <button onclick="onReset()" id="Reset" disabled="true">Reset</button>
 
-    <input type="text" id="th" value="00" />:
-    <input type="text" id="tm" value="00" />:
-    <input type="text" id="ts" value="00" />
+    <input type="number" id="th" value="00" min="01" max="59" />:
+    <input type="number" id="tm" value="00" min="01" max="59" />:
+    <input type="number" id="ts" value="00" min="01" max="59" />
     <script>
       ts = 0;
       tm = 0;
@@ -37,7 +37,8 @@
 
           if (ts == 0 && tm == 0 && th == 0) {
             start = false;
-            alert("Time is up!");
+            var audio = new Audio("Ding.mp3");
+            audio.play();
           }
         }
       }
@@ -47,18 +48,30 @@
         tm = document.getElementById("tm").value;
         ts = document.getElementById("ts").value;
         start = true;
-        document.getElementById("Start").disabled = false;
-        document.getElementById("Stop").disabled = true;
+        if (ts == 0 && tm == 0 && th == 0) {
+          start = false;
+          alert("You can't start on 0!");
+        } else {
+          document.getElementById("Start").disabled = true;
+          document.getElementById("Stop").disabled = false;
+        }
       }
 
       function onStop() {
         start = false;
-        document.getElementById("Start").disabled = true;
-        document.getElementById("Stop").disabled = false;
-        document.getElementById("Reset").disabled = true;
+        document.getElementById("Reset").disabled = false;
+        if (ts == 0 && tm == 0 && th == 0) {
+          document.getElementById("Reset").disabled = true;
+        }
+        document.getElementById("Start").disabled = false;
+        document.getElementById("Stop").disabled = true;
       }
 
       function onReset() {
+        ts = 0;
+        tm = 0;
+        th = 0;
+        document.getElementById("Timer").innerText = "00:00:00";
         document.getElementById("Start").disabled = false;
         document.getElementById("Stop").disabled = true;
         document.getElementById("Reset").disabled = true;
