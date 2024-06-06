@@ -206,16 +206,25 @@
         document.getElementById("input").value = 0;
       }
       function minus() {
+        if (op != "") {
+          calculate();
+        }
         x = new Decimal(document.getElementById("input").value);
         op = "minus";
         document.getElementById("input").value = 0;
       }
       function times() {
+        if (op != "") {
+          calculate();
+        }
         x = new Decimal(document.getElementById("input").value);
         op = "times";
         document.getElementById("input").value = 0;
       }
       function divide() {
+        if (op != "") {
+          calculate();
+        }
         x = new Decimal(document.getElementById("input").value);
         op = "divide";
         document.getElementById("input").value = 0;
