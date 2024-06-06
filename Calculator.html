@@ -35,7 +35,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/9.0.0/decimal.min.js"></script>
   </head>
   <body>
-    <p id="Calculator">Calculator(non-chained calculations only)</p>
+    <p id="Calculator">Calculator</p>
     <input
       type="text"
       id="input"
@@ -46,53 +46,135 @@
     <table>
       <tr>
         <td>
-          <button class="btn btn-outline-danger id="AC" onclick="reset()">AC</button>
-          <button class="btn btn-outline-warning id="+/-" onclick="toggleSign()">±</button>
-          <button class="btn btn-outline-warning id="%" onclick="percentage()">%</button>
-          <button class="btn btn-outline-warning id="/" onclick="divide()">÷</button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button class="btn btn-outline-secondary id="7" onclick="addNumber(7)">7</button>
-          <button class="btn btn-outline-secondary id="8" onclick="addNumber(8)">8</button>
-          <button class="btn btn-outline-secondary id="9" onclick="addNumber(9)">9</button>
-          <button class="btn btn-outline-warning id="*" onclick="times()">×</button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button class="btn btn-outline-secondary id="4" onclick="addNumber(4)">4</button>
-          <button class="btn btn-outline-secondary id="5" onclick="addNumber(5)">5</button>
-          <button class="btn btn-outline-secondary id="6" onclick="addNumber(6)">6</button>
-          <button class="btn btn-outline-warning id="-" onclick="minus()">-</button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button class="btn btn-outline-secondary id="1" onclick="addNumber(1)">1</button>
-          <button class="btn btn-outline-secondary id="2" onclick="addNumber(2)">2</button>
-          <button class="btn btn-outline-secondary id="3" onclick="addNumber(3)">3</button>
-          <button class="btn btn-outline-warning id="+" onclick="plus()">+</button>
+          <button class="btn btn-outline-danger" id="AC" onclick="reset()">
+            AC
+          </button>
+          <button
+            class="btn btn-outline-warning"
+            id="+/-"
+            onclick="toggleSign()"
+          >
+            ±
+          </button>
+          <button class="btn btn-outline-warning" id="%" onclick="percentage()">
+            %
+          </button>
+          <button class="btn btn-outline-warning" id="/" onclick="divide()">
+            ÷
+          </button>
         </td>
       </tr>
       <tr>
         <td>
           <button
-          class="btn btn-outline-secondary " style="width: 104px!important; margin-right: 1px"
+            class="btn btn-outline-secondary"
+            id="7"
+            onclick="addNumber(7)"
+          >
+            7
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            id="8"
+            onclick="addNumber(8)"
+          >
+            8
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            id="9"
+            onclick="addNumber(9)"
+          >
+            9
+          </button>
+          <button class="btn btn-outline-warning" id="*" onclick="times()">
+            ×
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button
+            class="btn btn-outline-secondary"
+            id="4"
+            onclick="addNumber(4)"
+          >
+            4
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            id="5"
+            onclick="addNumber(5)"
+          >
+            5
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            id="6"
+            onclick="addNumber(6)"
+          >
+            6
+          </button>
+          <button class="btn btn-outline-warning" id="-" onclick="minus()">
+            -
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button
+            class="btn btn-outline-secondary"
+            id="1"
+            onclick="addNumber(1)"
+          >
+            1
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            id="2"
+            onclick="addNumber(2)"
+          >
+            2
+          </button>
+          <button
+            class="btn btn-outline-secondary"
+            id="3"
+            onclick="addNumber(3)"
+          >
+            3
+          </button>
+          <button class="btn btn-outline-warning" id="+" onclick="plus()">
+            +
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button
+            class="btn btn-outline-secondary"
+            style="width: 104px !important; margin-right: 1px"
             id="0"
             onclick="addNumber(0)"
           >
             0
           </button>
-          <button class="btn btn-outline-warning id="." onclick="decimal()">.</button>
-          <button class="btn btn-outline-primary id="=" style="margin-left: -1px" onclick="calculate()">
+          <button class="btn btn-outline-warning" id="." onclick="decimal()">
+            .
+          </button>
+          <button
+            class="btn btn-outline-primary"
+            id="="
+            style="margin-left: -1px"
+            onclick="calculate()"
+          >
             =
           </button>
         </td>
       </tr>
     </table>
     <script>
+      let op = "";
+
       function addNumber(num) {
         document.getElementById("input").value = parseFloat(
           document.getElementById("input").value + num
@@ -100,8 +182,8 @@
       }
       function reset() {
         document.getElementById("input").value = 0;
-        x = 0
-        y = 0
+        x = 0;
+        y = 0;
       }
       function toggleSign() {
         document.getElementById("input").value =
@@ -116,6 +198,9 @@
           document.getElementById("input").value / 100;
       }
       function plus() {
+        if (op != "") {
+          calculate();
+        }
         x = new Decimal(document.getElementById("input").value);
         op = "plus";
         document.getElementById("input").value = 0;
