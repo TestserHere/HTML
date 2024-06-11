@@ -268,7 +268,10 @@
             .removeClass("bi-caret-down-fill")
             .addClass("bi-caret-down");
           $("#b" + current).prop("disabled", true);
-
+          $("#F" + current)
+            .prev()
+            .find("button")
+            .prop("disabled", true);
           $("#b" + current)
             .removeClass("btn-outline-secondary")
             .addClass("btn-success");
@@ -305,7 +308,10 @@
         $("#b" + current)
           .removeClass("btn-success")
           .addClass("btn-outline-secondary");
-
+        $("#F" + current)
+          .prev()
+          .find("button")
+          .prop("disabled", false);
         target = level;
         played = false;
       }
